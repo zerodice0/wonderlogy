@@ -1,67 +1,139 @@
-import { useState } from 'react'
-import beaver from './assets/beaver.svg'
-import { Button } from './components/ui/button'
-import { hcWithType } from 'server/dist/client'
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3000"
-
-const client = hcWithType(SERVER_URL);
-
-type ResponseType = Awaited<ReturnType<typeof client.hello.$get>>;
+import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { LoginForm } from './components/LoginForm'
+import { RegisterForm } from './components/RegisterForm'
+import { LanguageSwitcher } from './components/LanguageSwitcher'
+import { ErrorBoundary } from './components/ErrorBoundary'
+import { Dialog } from './components/ui/dialog'
+import { apiService, LoginRequest, RegisterRequest } from './services/api'
+import { validateEnvironment } from './config/api'
+import { getErrorMessage, getErrorTitle } from './utils/errorHandling'
+import './utils/healthCheck'
+import './i18n'
 
 function App() {
-  const [data, setData] = useState<Awaited<ReturnType<ResponseType["json"]>> | undefined>()
+  const { t } = useTranslation()
+  const [isLogin, setIsLogin] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  const [dialog, setDialog] = useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    variant: 'default' | 'destructive';
+  }>({ isOpen: false, title: '', message: '', variant: 'default' })
 
-  async function sendRequest() {
+  useEffect(() => {
+    validateEnvironment();
+  }, []);
+
+  const handleLogin = async (data: LoginRequest) => {
+    setIsLoading(true)
     try {
-      const res = await client.hello.$get()
-      if (!res.ok) {
-        console.log("Error fetching data")
-        return
+      const response = await apiService.login(data);
+      if (response.success) {
+        console.log('✅ Login successful:', response);
+        setDialog({
+          isOpen: true,
+          title: '로그인 성공',
+          message: '로그인에 성공했습니다!',
+          variant: 'default'
+        });
+      } else {
+        console.error('❌ Login failed:', response.message);
+        setDialog({
+          isOpen: true,
+          title: '로그인 실패',
+          message: response.message || '로그인에 실패했습니다.',
+          variant: 'destructive'
+        });
       }
-      const data = await res.json()
-      setData(data)
     } catch (error) {
-      console.log(error)
+      console.error('❌ Login error:', error);
+      const apiError = getErrorMessage(error);
+      setDialog({
+        isOpen: true,
+        title: getErrorTitle(apiError.type),
+        message: apiError.message,
+        variant: 'destructive'
+      });
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleRegister = async (data: RegisterRequest) => {
+    setIsLoading(true)
+    try {
+      const response = await apiService.register(data);
+      if (response.success) {
+        console.log('✅ Registration successful:', response);
+        setDialog({
+          isOpen: true,
+          title: '회원가입 성공',
+          message: '회원가입에 성공했습니다! 로그인 페이지로 이동합니다.',
+          variant: 'default'
+        });
+        setIsLogin(true);
+      } else {
+        console.error('❌ Registration failed:', response.message);
+        setDialog({
+          isOpen: true,
+          title: '회원가입 실패',
+          message: response.message || '회원가입에 실패했습니다.',
+          variant: 'destructive'
+        });
+      }
+    } catch (error) {
+      console.error('❌ Registration error:', error);
+      const apiError = getErrorMessage(error);
+      setDialog({
+        isOpen: true,
+        title: getErrorTitle(apiError.type),
+        message: apiError.message,
+        variant: 'destructive'
+      });
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
-    <div className="max-w-xl mx-auto flex flex-col gap-6 items-center justify-center min-h-screen">
-      <a href="https://github.com/stevedylandev/bhvr" target="_blank">
-        <img
-          src={beaver}
-          className="w-16 h-16 cursor-pointer"
-          alt="beaver logo"
-        />
-      </a>
-      <h1 className="text-5xl font-black">bhvr</h1>
-      <h2 className="text-2xl font-bold">Bun + Hono + Vite + React</h2>
-      <p>A typesafe fullstack monorepo</p>
-      <div className='flex items-center gap-4'>
-        <Button
-          onClick={sendRequest}
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="absolute top-4 right-4">
+            <LanguageSwitcher />
+          </div>
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('appTitle')}</h1>
+            <p className="text-gray-600">{t('appDescription')}</p>
+          </div>
+          
+          {isLogin ? (
+            <LoginForm
+              onSubmit={handleLogin}
+              onSwitchToRegister={() => setIsLogin(false)}
+              isLoading={isLoading}
+            />
+          ) : (
+            <RegisterForm
+              onSubmit={handleRegister}
+              onSwitchToLogin={() => setIsLogin(true)}
+              isLoading={isLoading}
+            />
+          )}
+        </div>
+        
+        <Dialog
+          isOpen={dialog.isOpen}
+          onClose={() => setDialog(prev => ({ ...prev, isOpen: false }))}
+          title={dialog.title}
+          variant={dialog.variant}
         >
-          Call API
-        </Button>
-        <Button
-          variant='secondary'
-          asChild
-        >
-          <a target='_blank' href="https://bhvr.dev">
-          Docs
-          </a>
-        </Button>
+          {dialog.message}
+        </Dialog>
       </div>
-        {data && (
-          <pre className="bg-gray-100 p-4 rounded-md">
-            <code>
-            Message: {data.message} <br />
-            Success: {data.success.toString()}
-            </code>
-          </pre>
-        )}
-    </div>
+    </ErrorBoundary>
   )
 }
 
