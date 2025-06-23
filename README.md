@@ -209,11 +209,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-Steve Simkins
+zerodice0
 
 ## 🔗 Links
 
-- [Repository](https://github.com/stevedylandev/bhvr)
+- [BHVR](https://github.com/stevedylandev/bhvr)
 - [한국어 문서](./README-kr.md)
 
 ---

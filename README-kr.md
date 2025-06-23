@@ -209,11 +209,11 @@ bun run typecheck      # TypeScript 타입 체크
 
 ## 👨‍💻 작성자
 
-Steve Simkins
+zerodice0
 
 ## 🔗 링크
 
-- [저장소](https://github.com/stevedylandev/bhvr)
+- [BHVR](https://github.com/stevedylandev/bhvr)
 - [English Documentation](./README.md)
 
 ---
