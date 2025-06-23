@@ -2,12 +2,12 @@ export const translations = {
   ko: {
     translation: {
       // App Title & Description
-      appTitle: 'Wonderlogy',
-      appDescription: '무계획적이지만 재밌게 여행을 시작하세요!',
+      appTitle: '✈️ Wonderlogy',
+      appDescription: '무계획적이지만 재밌게 여행을 시작하세요! 🌍✨',
       
       // Login Form
-      login: '로그인',
-      loginDescription: '계정에 로그인하여 여행을 시작하세요',
+      login: '🔑 로그인',
+      loginDescription: '계정에 로그인하여 여행을 시작하세요 🎅',
       userId: '아이디',
       userIdPlaceholder: '아이디를 입력하세요',
       password: '비밀번호',
@@ -18,8 +18,8 @@ export const translations = {
       goToRegister: '회원가입',
       
       // Register Form
-      register: '회원가입',
-      registerDescription: '새 계정을 만들어 여행을 시작하세요',
+      register: '🎆 회원가입',
+      registerDescription: '새 계정을 만들어 여행을 시작하세요 🌅',
       email: '이메일',
       emailPlaceholder: '이메일을 입력하세요',
       name: '이름',
@@ -53,12 +53,12 @@ export const translations = {
   en: {
     translation: {
       // App Title & Description
-      appTitle: 'Wonderlogy',
-      appDescription: 'Start your spontaneous yet fun travel adventure!',
+      appTitle: '✈️ Wonderlogy',
+      appDescription: 'Start your spontaneous yet fun travel adventure! 🌍✨',
       
       // Login Form
-      login: 'Login',
-      loginDescription: 'Sign in to your account to start traveling',
+      login: '🔑 Login',
+      loginDescription: 'Sign in to your account to start traveling 🎅',
       userId: 'User ID',
       userIdPlaceholder: 'Enter your user ID',
       password: 'Password',
@@ -69,8 +69,8 @@ export const translations = {
       goToRegister: 'Sign up',
       
       // Register Form
-      register: 'Sign Up',
-      registerDescription: 'Create a new account to start traveling',
+      register: '🎆 Sign Up',
+      registerDescription: 'Create a new account to start traveling 🌅',
       email: 'Email',
       emailPlaceholder: 'Enter your email',
       name: 'Name',
@@ -104,12 +104,12 @@ export const translations = {
   ja: {
     translation: {
       // App Title & Description
-      appTitle: 'Wonderlogy',
-      appDescription: '無計画だけど楽しい旅を始めましょう！',
+      appTitle: '✈️ Wonderlogy',
+      appDescription: '無計画だけど楽しい旅を始めましょう！ 🌍✨',
       
       // Login Form
-      login: 'ログイン',
-      loginDescription: 'アカウントにログインして旅を始めましょう',
+      login: '🔑 ログイン',
+      loginDescription: 'アカウントにログインして旅を始めましょう 🎅',
       userId: 'ユーザーID',
       userIdPlaceholder: 'ユーザーIDを入力してください',
       password: 'パスワード',
@@ -120,8 +120,8 @@ export const translations = {
       goToRegister: '新規登録',
       
       // Register Form
-      register: '新規登録',
-      registerDescription: '新しいアカウントを作成して旅を始めましょう',
+      register: '🎆 新規登録',
+      registerDescription: '新しいアカウントを作成して旅を始めましょう 🌅',
       email: 'メールアドレス',
       emailPlaceholder: 'メールアドレスを入力してください',
       name: '名前',

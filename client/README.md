@@ -1,11 +1,11 @@
-# Wonderlogy - 무계획 여행 도우미
+# ✈️ Wonderlogy - 무계획 여행 도우미
 
-## 프로젝트 개요
+## 🌟 프로젝트 개요
 여행 계획을 세우는 것이 어려운 사람들을 위한 웹 애플리케이션입니다. 사용자가 관심있는 장소들을 미리 리스트업 해놓고, 실제 여행지에서 그때그때 가고싶은 장소를 선택하여 자유로운 여행 경로를 만들고 기록할 수 있습니다.
 
 **서비스 컨셉**: "무계획적이지만 재밌게 여행을 할 수 있는 서비스!"
 
-## 프로젝트 구조
+## 🏗️ 프로젝트 구조
 
 ```
 wonderlogy/
@@ -35,7 +35,7 @@ wonderlogy/
 └── shared/                 # 공유 타입 및 유틸리티
 ```
 
-## 기술 스택
+## 🛠️ 기술 스택
 
 ### Frontend
 - **React 19** + **TypeScript** + **Vite**
@@ -49,7 +49,7 @@ wonderlogy/
 - **PostgreSQL** - 데이터베이스
 - **TypeScript** - 타입 안전성
 
-## 다국어 지원 (Internationalization)
+## 🌍 다국어 지원 (Internationalization)
 
 이 프로젝트는 한국어, 영어, 일본어를 지원합니다.
 
@@ -117,7 +117,7 @@ export const translations = {
 - 🇺🇸 English (en)  
 - 🇯🇵 日本語 (ja)
 
-## 개발 시작하기
+## 🚀 개발 시작하기
 
 ### 필수 요구사항
 - Node.js 18+ 또는 Bun
@@ -202,7 +202,7 @@ VITE_API_URL=https://your-api-server.com
 - `npm run preview` - 빌드 결과 미리보기
 - `npm run lint` - ESLint 실행
 
-## 주요 기능
+## ✨ 주요 기능
 
 ### 인증 시스템
 - 사용자 로그인/회원가입
@@ -215,5 +215,5 @@ VITE_API_URL=https://your-api-server.com
 - 접근성 고려
 - 일관된 디자인 시스템
 
-## 라이선스
+## 📄 라이선스
 이 프로젝트는 MIT 라이선스 하에 배포됩니다.

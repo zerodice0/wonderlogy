@@ -1,15 +1,15 @@
-# Wonderlogy Server
+# 🔧 Wonderlogy Server
 
 Hono 기반의 TypeScript 백엔드 서버입니다. JWT 인증 시스템과 PostgreSQL 데이터베이스를 사용합니다.
 
-## 프로젝트 목적
+## 🎯 프로젝트 목적
 
 - **인증 시스템**: JWT 토큰 기반 사용자 인증 (회원가입/로그인)
 - **API 서버**: RESTful API 제공
 - **데이터베이스**: PostgreSQL을 통한 사용자 데이터 관리
 - **타입 안전성**: TypeScript로 안전한 코드 작성
 
-## 개발 환경 설정
+## 🛠️ 개발 환경 설정
 
 ### 의존성 설치
 ```bash
@@ -38,7 +38,7 @@ bun run dev
 
 서버가 http://localhost:3000 에서 실행됩니다.
 
-## API 엔드포인트
+## 📋 API 엔드포인트
 
 ### 인증 API
 
@@ -65,9 +65,9 @@ Content-Type: application/json
 }
 ```
 
-## 테스트
+## 🧪 테스트
 
-### 테스트 실행
+### 🧪 테스트 실행
 ```bash
 # 모든 테스트 실행
 bun run test
@@ -79,7 +79,7 @@ bun run test:watch
 bun run test:coverage
 ```
 
-### 테스트 구성
+### 🧪 테스트 구성
 
 - **입력값 검증 테스트**: 필수 필드, 최소 길이, 비밀번호 확인 등
 - **에러 케이스 테스트**: 잘못된 요청에 대한 적절한 에러 응답
@@ -87,7 +87,7 @@ bun run test:coverage
 
 테스트는 실제 데이터베이스에 데이터를 저장하지 않고 API 로직만 검증합니다.
 
-## 빌드
+## 📦 빌드
 
 ```bash
 # TypeScript 컴파일
@@ -96,7 +96,7 @@ bun run build
 
 컴파일된 파일은 `dist/` 디렉토리에 생성됩니다.
 
-## 프로젝트 구조
+## 📁 프로젝트 구조
 
 ```
 src/
