@@ -1,10 +1,13 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import type { ApiResponse } from "shared/dist";
+import { auth } from "./routes/auth";
 
 export const app = new Hono()
 
 .use(cors())
+
+.route("/auth", auth)
 
 .get("/", (c) => {
 	return c.text("Hello Hono!");

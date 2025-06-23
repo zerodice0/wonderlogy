@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun add:*)",
+      "Bash(bun run:*)",
+      "Bash(cp:*)",
+      "Bash(bun run:*)",
+      "Bash(brew install:*)",
+      "Bash(brew services start:*)",
+      "Bash(/opt/homebrew/opt/postgresql@14/bin/createdb:*)",
+      "Bash(/opt/homebrew/opt/postgresql@14/bin/createuser:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": []
+  }
+}

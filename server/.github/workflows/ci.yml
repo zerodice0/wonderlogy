@@ -1,0 +1,115 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test Server
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: wonderlogy_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies (Root)
+        run: bun install
+
+      - name: Install dependencies (Server)
+        run: |
+          cd server
+          bun install
+
+      - name: Build shared package
+        run: |
+          cd shared
+          bun run build
+
+      - name: Build server
+        run: |
+          cd server
+          bun run build
+
+      - name: Run TypeScript check
+        run: |
+          cd server
+          bun run typecheck
+
+      - name: Run tests
+        run: |
+          cd server
+          bun run test:ci
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: wonderlogy_test
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          JWT_SECRET: test-jwt-secret-key-for-ci
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./server/coverage/lcov.info
+          fail_ci_if_error: false
+
+  build:
+    name: Build Server
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies (Root)
+        run: bun install
+
+      - name: Install dependencies (Server)
+        run: |
+          cd server
+          bun install
+
+      - name: Build shared package
+        run: |
+          cd shared
+          bun run build
+
+      - name: Build server
+        run: |
+          cd server
+          bun run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: server-build
+          path: server/dist/
